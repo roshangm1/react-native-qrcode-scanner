@@ -279,15 +279,17 @@ const styles = StyleSheet.create({
   infoView: {
     // flex: 2,
     justifyContent: "center",
-    alignItems: "center",
-    width: Dimensions.get("window").width
+    alignItems: "center"
+    // width: Dimensions.get("window").width
   },
 
   camera: {
-    flex: 0,
+    // flex: 1,
+    marginTop: Platform.OS == "android" ? 60 : 20,
+
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "transparent",
+    // backgroundColor: "transparent",
     height: Dimensions.get("window").width
     // width: Dimensions.get("window").width
   },
