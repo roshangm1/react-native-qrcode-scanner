@@ -285,11 +285,11 @@ const styles = StyleSheet.create({
 
   camera: {
     // flex: 1,
-    marginTop: Platform.OS == "android" ? 60 : 20,
+    // marginTop: Platform.OS == "android" ? 60 : 20,
 
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: "transparent",
+    backgroundColor: "transparent",
     height: Dimensions.get("window").width
     // width: Dimensions.get("window").width
   },
