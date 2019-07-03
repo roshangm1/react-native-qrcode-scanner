@@ -263,7 +263,7 @@ export default class QRCodeScanner extends Component {
         <View style={[styles.infoView, this.props.topViewStyle]}>
           {this._renderTopContent()}
         </View>
-        {this._renderCamera()}
+        <View style={{ overflow: "hidden" }}>{this._renderCamera()}</View>
         <View style={[styles.infoView, this.props.bottomViewStyle]}>
           {this._renderBottomContent()}
         </View>
@@ -284,8 +284,8 @@ const styles = StyleSheet.create({
   },
 
   camera: {
-    // flex: 1,
-    // marginTop: Platform.OS == "android" ? 60 : 20,
+    // flex: 0,
+    // marginTop: Platform.OS == "android" ? 100 : 20,
 
     alignItems: "center",
     justifyContent: "center",
