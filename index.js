@@ -244,6 +244,7 @@ export default class QRCodeScanner extends Component {
           {...this.props.cameraProps}
         >
           {this._renderCameraMarker()}
+          {this.props.children}
         </Camera>
       );
     } else if (!isAuthorizationChecked) {
