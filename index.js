@@ -15,7 +15,6 @@ import {
   PermissionsAndroid
 } from "react-native";
 
-import Permissions from "react-native-permissions";
 import { RNCamera as Camera } from "react-native-camera";
 
 const PERMISSION_AUTHORIZED = "authorized";
@@ -108,35 +107,31 @@ export default class QRCodeScanner extends Component {
     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
   }
 
-  componentWillMount() {
-    if (Platform.OS === "ios") {
-      Permissions.request(CAMERA_PERMISSION).then(response => {
-        this.setState({
-          isAuthorized: response === PERMISSION_AUTHORIZED,
-          isAuthorizationChecked: true
-        });
-      });
-    } else if (
-      Platform.OS === "android" &&
-      this.props.checkAndroid6Permissions
-    ) {
-      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
-        title: this.props.permissionDialogTitle,
-        message: this.props.permissionDialogMessage
-      }).then(granted => {
-        const isAuthorized =
-          Platform.Version >= 23
-            ? granted === PermissionsAndroid.RESULTS.GRANTED
-            : granted === true;
-
-        this.setState({ isAuthorized, isAuthorizationChecked: true });
-      });
-    } else {
-      this.setState({ isAuthorized: true, isAuthorizationChecked: true });
-    }
-  }
 
   componentDidMount() {
+
+    if(Platform.OS === "iOS") {
+      this.setState({isAuthorizationChecked: true})
+    } else if (
+       Platform.OS === "android" &&
+       this.props.checkAndroid6Permissions
+     ) {
+       PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
+         title: this.props.permissionDialogTitle,
+         message: this.props.permissionDialogMessage
+       }).then(granted => {
+         const isAuthorized =
+           Platform.Version >= 23
+             ? granted === PermissionsAndroid.RESULTS.GRANTED
+             : granted === true;
+ 
+         this.setState({ isAuthorized, isAuthorizationChecked: true });
+       });
+     } else {
+       this.setState({ isAuthorized: true, isAuthorizationChecked: true });
+     }
+
+
     if (this.props.fadeIn) {
       Animated.sequence([
         Animated.delay(1000),
